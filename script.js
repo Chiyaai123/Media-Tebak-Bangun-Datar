@@ -5,11 +5,11 @@ const allQuestions=[
 {img:"GAMBAR/bulat.png",answer:"Lingkaran",fact:"Tidak memiliki sudut"},
 {img:"GAMBAR/jajargenjang.png",answer:"Jajar Genjang",fact:"Sisi berhadapan sejajar"},
 {img:"GAMBAR/trapesium.png",answer:"Trapesium",fact:"Memiliki satu pasang sisi sejajar"},
-{img:"GAMBAR/belahketupat.png",answer:"Belah Ketupat",fact:"Semua sisi sama panjang"},
+{img:"GABAR/belahketupat.png",answer:"Belah Ketupat",fact:"Semua sisi sama panjang"},
 {img:"GAMBAR/layang.png",answer:"Layang-layang",fact:"Dua pasang sisi sama panjang"},
 {img:"GAMBAR/segilima.png",answer:"Segi Lima",fact:"Memiliki 5 sisi"},
 {img:"GAMBAR/segienam.png",answer:"Segi Enam",fact:"Memiliki 6 sisi"}
-;
+];
 
 let questions=[],index=0,score=0,lives=3;
 let correctCount=0,wrongCount=0;
