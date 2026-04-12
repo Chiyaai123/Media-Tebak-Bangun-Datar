@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Game</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="panel">
+
+<button class="profileBtn" onclick="openProfile()">👤</button>
+
+<h2>Tebak Bangun Datar</h2>
+
+<div class="status">
+❤️ <span id="lives">3</span>
+⭐ <span id="score">0</span>
+<button class="soundBtn" onclick="toggleSound()">🔊</button>
+</div>
+
+<div class="progress">
+<div id="progressBar"></div>
+</div>
+
+<img id="shapeImg">
+
+<p id="fact"></p>
+
+<div class="timerBox">
+⏱ <span id="timer">10</span>
+</div>
+
+<div id="answers"></div>
+
+</div>
+
+<!-- POPUP GAME -->
+<div id="popup" class="popup">
+<h2>🎉 Selesai!</h2>
+<p id="finalScore"></p>
+<p>✅ Benar: <span id="correctCount"></span></p>
+<p>❌ Salah: <span id="wrongCount"></span></p>
+<p>🏆 Highscore: <span id="bestScore"></span></p>
+
+<button class="btn" onclick="restart()">Ulangi</button>
+<button class="btn" onclick="home()">Home</button>
+</div>
+
+<!-- POPUP PROFIL -->
+<div id="profilePopup" class="profilePopup">
+<div class="profileBox">
+
+<span class="closeBtn" onclick="closeProfile()">✖</span>
+
+<h2>👥 Profil Tim</h2>
+
+<div class="profileContent">
+
+<div class="profileCard">
+<h3>🧑‍🏫 Pemateri</h3>
+<p><b>Sofiatunnisa</b></p>
+<p>📍 Hulu Sungai Tengah, 07 April 2005</p>
+<p>🎓 Teknologi Pendidikan – ULM</p>
+<p class="desc">Mahasiswa yang berfokus pada pembelajaran inovatif.</p>
+<p class="role">📘 Penyusun Modul</p>
+<p>📧 sofia.tnnsa@gmail.com</p>
+<p>📱 @sofia.tnnsa_</p>
+</div>
+
+<div class="profileCard">
+<h3>👨‍💻 Pengembang</h3>
+<p><b>M. Dimas Saputra</b></p>
+<p>📍 Banjarmasin, 23 Maret 2005</p>
+<p>🎓 Teknologi Pendidikan – ULM</p>
+<p class="desc">Mengembangkan media pembelajaran interaktif.</p>
+<p class="role">💻 Developer</p>
+<p>📧 Dimasespigas23@gmail.com</p>
+<p>📱 @Ch1.y_</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- AUDIO -->
+<audio id="bgm" src="sound/Pixel-Peeker-Polka-faster(chosic.com).mp3" loop></audio>
+<audio id="correct" src="sound/mixkit-correct-answer-tone-2870.wav"></audio>
+<audio id="wrong" src="sound/mixkit-wrong-answer-fail-notification-946.wav"></audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
