@@ -1,14 +1,14 @@
 const allQuestions=[
-{img:"gambar/kotak.png",answer:"Persegi",fact:"Memiliki 4 sisi sama panjang"},
-{img:"gambar/persegipanjang.png",answer:"Persegi Panjang",fact:"Sisi berhadapan sama panjang"},
-{img:"gambar/segitiga.png",answer:"Segitiga",fact:"Memiliki 3 sisi"},
-{img:"gambar/bulat.png",answer:"Lingkaran",fact:"Tidak memiliki sudut"},
-{img:"gambar/jajargenjang.png",answer:"Jajar Genjang",fact:"Sisi berhadapan sejajar"},
-{img:"gambar/trapesium.png",answer:"Trapesium",fact:"Memiliki satu pasang sisi sejajar"},
-{img:"gambar/belahketupat.png",answer:"Belah Ketupat",fact:"Semua sisi sama panjang"},
-{img:"gambar/layang.png",answer:"Layang-layang",fact:"Dua pasang sisi sama panjang"},
-{img:"gambar/segilima.png",answer:"Segi Lima",fact:"Memiliki 5 sisi"},
-{img:"gambar/segienam.png",answer:"Segi Enam",fact:"Memiliki 6 sisi"}
+{img:"GAMBAR/kotak.png",answer:"Persegi",fact:"Memiliki 4 sisi sama panjang"},
+{img:"GAMBAR/persegipanjang.png",answer:"Persegi Panjang",fact:"Sisi berhadapan sama panjang"},
+{img:"GAMBAR/segitiga.png",answer:"Segitiga",fact:"Memiliki 3 sisi"},
+{img:"GAMBAR/bulat.png",answer:"Lingkaran",fact:"Tidak memiliki sudut"},
+{img:"GAMBAR/jajargenjang.png",answer:"Jajar Genjang",fact:"Sisi berhadapan sejajar"},
+{img:"GAMBAR/trapesium.png",answer:"Trapesium",fact:"Memiliki satu pasang sisi sejajar"},
+{img:"GAMBAR/belahketupat.png",answer:"Belah Ketupat",fact:"Semua sisi sama panjang"},
+{img:"GAMBAR/layang.png",answer:"Layang-layang",fact:"Dua pasang sisi sama panjang"},
+{img:"GAMBAR/segilima.png",answer:"Segi Lima",fact:"Memiliki 5 sisi"},
+{img:"GAMBAR/segienam.png",answer:"Segi Enam",fact:"Memiliki 6 sisi"}
 ];
 
 let questions=[],index=0,score=0,lives=3;
