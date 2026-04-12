@@ -15,7 +15,7 @@ let questions=[],index=0,score=0,lives=3;
 let correctCount=0,wrongCount=0;
 let timer,timeLeft=10;
 
-startGame();
+window.onload=()=>startGame();
 
 function startGame(){
 questions=[...allQuestions].sort(()=>Math.random()-0.5);
@@ -32,9 +32,10 @@ finishGame();return;
 
 let q=questions[index];
 
-document.getElementById("shapeImg").src=q.img;
-document.getElementById("fact").innerText="Petunjuk: "+q.fact;
+let img=document.getElementById("shapeImg");
+if(img) img.src=q.img;
 
+document.getElementById("fact").innerText="Petunjuk: "+q.fact;
 document.getElementById("score").innerText=score;
 document.getElementById("lives").innerText=lives;
 
@@ -52,13 +53,10 @@ document.getElementById("timer").innerText=timeLeft;
 
 if(timeLeft<=0){
 clearInterval(timer);
-
 lives--;
 wrongCount++;
-index++; // 🔥 FIX biar lanjut soal
-
+index++;
 shakeScreen();
-
 setTimeout(loadQuestion,400);
 }
 },1000);
@@ -76,7 +74,6 @@ box.innerHTML="";
 
 answers.forEach(a=>{
 let b=document.createElement("button");
-b.className="btn";
 b.innerText=a;
 b.onclick=()=>check(a,q.answer);
 box.appendChild(b);
@@ -84,17 +81,18 @@ box.appendChild(b);
 }
 
 function check(pick,correct){
-
 clearInterval(timer);
 
 if(pick===correct){
 score+=10;
 correctCount++;
-document.getElementById("correct").play();
+let s=document.getElementById("correct");
+if(s) s.play();
 }else{
 lives--;
 wrongCount++;
-document.getElementById("wrong").play();
+let s=document.getElementById("wrong");
+if(s) s.play();
 shakeScreen();
 }
 
@@ -103,7 +101,6 @@ setTimeout(loadQuestion,600);
 }
 
 function finishGame(){
-
 let high=localStorage.getItem("highscore")||0;
 if(score>high){
 localStorage.setItem("highscore",score);
@@ -123,41 +120,7 @@ document.getElementById("popup").classList.remove("show");
 startGame();
 }
 
-function home(){
-location.href="index.html";
-}
-
-/* SHAKE EFFECT */
 function shakeScreen(){
 document.body.classList.add("shakeScreen");
 setTimeout(()=>document.body.classList.remove("shakeScreen"),350);
-}
-
-/* FULLSCREEN HP */
-document.body.addEventListener("click",()=>{
-if(document.documentElement.requestFullscreen){
-document.documentElement.requestFullscreen();
-}
-},{once:true});
-
-/* =====================
-   POPUP PROFIL
-===================== */
-function openProfile(){
-document.getElementById("profilePopup").style.display="flex";
-}
-
-function closeProfile(){
-document.getElementById("profilePopup").style.display="none";
-}
-
-/* =====================
-   POPUP PERATURAN
-===================== */
-function peraturan(){
-document.getElementById("rulesPopup").classList.add("show");
-}
-
-function closeRules(){
-document.getElementById("rulesPopup").classList.remove("show");
 }
