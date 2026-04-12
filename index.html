@@ -3,263 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Tebak Bangun Datar</title>
 
-<style>
-
-/* ===== BACKGROUND ===== */
-body{
-margin:0;
-font-family:'Comic Sans MS', cursive;
-background:
-linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-url("background .png") center/cover no-repeat;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-}
-
-/* ===== PANEL ===== */
-.panel{
-background:linear-gradient(#8b5a2b,#5a3b1c);
-padding:35px;
-border-radius:25px;
-text-align:center;
-color:white;
-box-shadow:0 10px 40px rgba(0,0,0,0.7);
-animation:fadeIn 1s ease;
-width:320px;
-}
-
-/* ===== LOGO ===== */
-.logo{
-width:150px;
-animation:float 2s infinite ease-in-out;
-}
-
-/* ===== JUDUL KEREN ===== */
-h1{
-font-size:34px;
-margin:15px 0 10px;
-font-weight:bold;
-
-background: linear-gradient(45deg,#ffd54f,#ff9800,#ff5722);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-text-shadow:
-0 0 10px rgba(255,200,0,0.6),
-0 0 20px rgba(255,150,0,0.5);
-
-animation:glow 2s infinite alternate;
-}
-
-/* SUBTITLE */
-.subtitle{
-font-size:14px;
-opacity:0.9;
-margin-bottom:20px;
-}
-
-/* ===== TOMBOL KE BAWAH ===== */
-.btn-group{
-display:flex;
-flex-direction:column;
-gap:12px;
-margin-top:15px;
-}
-
-.btn{
-background:linear-gradient(#ffcc80,#ff9800);
-padding:14px;
-border-radius:15px;
-cursor:pointer;
-font-weight:bold;
-color:white;
-border:2px solid #bf360c;
-box-shadow:0 5px #bf360c;
-transition:.2s;
-font-size:16px;
-width:100%;
-}
-
-.btn:hover{
-transform:scale(1.08);
-box-shadow:0 8px #bf360c;
-}
-
-/* ===== LOADING ===== */
-.loading{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:22px;
-z-index:9999;
-flex-direction:column;
-}
-
-.bar{
-width:200px;
-height:10px;
-background:#333;
-margin-top:10px;
-border-radius:10px;
-overflow:hidden;
-}
-
-.bar div{
-height:100%;
-width:0%;
-background:lime;
-animation:load 2s linear forwards;
-}
-
-@keyframes load{to{width:100%;}}
-
-/* ===== POPUP ===== */
-.popup{
-display:none;
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(0.5);
-opacity:0;
-z-index:1000;
-width:90%;
-max-width:400px;
-}
-
-.popup.show{
-display:flex;
-opacity:1;
-transform:translate(-50%,-50%) scale(1);
-animation:popupBounce .5s ease;
-}
-
-.popup-content{
-background:linear-gradient(#7a4a22,#4b2a12);
-padding:20px;
-border-radius:20px;
-color:white;
-border:4px solid #41200d;
-}
-
-.popup-content h2{text-align:center;}
-
-@keyframes popupBounce{
-0%{transform:translate(-50%,-50%) scale(.5);}
-60%{transform:translate(-50%,-50%) scale(1.1);}
-100%{transform:translate(-50%,-50%) scale(1);}
-}
-
-/* ===== ANIMASI ===== */
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(30px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-@keyframes float{
-0%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0);}
-}
-
-@keyframes glow{
-from{
-text-shadow:
-0 0 10px rgba(255,200,0,0.6),
-0 0 20px rgba(255,150,0,0.5);
-}
-to{
-text-shadow:
-0 0 20px rgba(255,255,0,1),
-0 0 30px rgba(255,100,0,0.9);
-}
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- LOADING -->
-<div id="loading" class="loading">
-Loading Game...
-<div class="bar"><div></div></div>
-</div>
+<h1>🎮 Tebak Bangun Datar</h1>
 
-<div class="panel">
+<img id="shapeImg" width="200">
 
-<img src="logo.png" class="logo">
+<p id="fact"></p>
 
-<h1> Tebak Bangun Datar</h1>
-<p class="subtitle">Belajar sambil bermain 🎮✨</p>
+<div id="answers"></div>
 
-<!-- TOMBOL KE BAWAH -->
-<div class="btn-group">
-<button class="btn" onclick="play()">▶ Mulai</button>
-<button class="btn" onclick="peraturan()">📜 Peraturan</button>
-</div>
+<p>⏱️ Waktu: <span id="timer"></span></p>
+<p>⭐ Skor: <span id="score"></span></p>
+<p>❤️ Nyawa: <span id="lives"></span></p>
 
-</div>
-
-<!-- POPUP -->
-<div id="rulesPopup" class="popup">
-<div class="popup-content">
-<h2>📜 Peraturan</h2>
-<ul>
-<<li>⏱ Setiap soal memiliki waktu <b>10 detik</b>.</li>
-<li>🎯 Pilih jawaban yang <b>paling benar</b>.</li>
-<li>⭐ Jawaban benar akan mendapat <b>+10 poin</b>.</li>
-<li>❤️ Jawaban salah akan <b>mengurangi 1 nyawa</b>.</li>
-<li>🏁 Game selesai jika <b>nyawa habis</b> atau soal selesai.</li>
-</ul>
-<button class="btn" onclick="closeRules()">Tutup</button>
-</div>
+<div style="width:100%;background:#ddd;height:10px;">
+  <div id="progressBar" style="height:10px;background:green;width:0%;"></div>
 </div>
 
 <!-- AUDIO -->
-<audio id="clickSound" src="sound/mixkit-select-click-1109.wav"></audio>
+<audio id="correct" src="AUDIO/correct.mp3"></audio>
+<audio id="wrong" src="AUDIO/wrong.mp3"></audio>
 
-<script>
+<!-- POPUP -->
+<div id="popup" class="popup">
+  <h2>Game Selesai</h2>
+  <p id="finalScore"></p>
+  <p>🏆 High Score: <span id="bestScore"></span></p>
+  <p>✅ Benar: <span id="correctCount"></span></p>
+  <p>❌ Salah: <span id="wrongCount"></span></p>
 
-window.onload = ()=>{
-setTimeout(()=>{
-document.getElementById("loading").style.display="none";
-},2000);
-}
+  <button onclick="restart()">Main Lagi</button>
+</div>
 
-function clickSound(){
-document.getElementById("clickSound").play();
-}
-
-function play(){
-clickSound();
-setTimeout(()=>{
-window.location.href="game.html";
-},300);
-}
-
-function peraturan(){
-clickSound();
-document.getElementById("rulesPopup").classList.add("show");
-}
-
-function closeRules(){
-clickSound();
-document.getElementById("rulesPopup").classList.remove("show");
-}
-
-</script>
+<script src="script.js" defer></script>
 
 </body>
 </html>
