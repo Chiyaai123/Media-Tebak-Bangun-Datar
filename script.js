@@ -14,51 +14,17 @@ const allQuestions=[
 let questions=[],index=0,score=0,lives=3;
 let correctCount=0,wrongCount=0;
 let timer,timeLeft=10;
-let gameActive=false;
-let timeoutRef;
-
-/* AUDIO SAFE */
-function playSound(id){
-  let s=document.getElementById(id);
-  if(s){
-    s.currentTime=0;
-    s.play().catch(()=>{});
-  }
-}
-
-/* UNLOCK AUDIO (WAJIB DI BROWSER) */
-let audioUnlocked=false;
-document.body.addEventListener("click",()=>{
-  if(!audioUnlocked){
-    ["correct","wrong"].forEach(id=>{
-      let s=document.getElementById(id);
-      if(s){
-        s.play().then(()=>s.pause()).catch(()=>{});
-      }
-    });
-    audioUnlocked=true;
-  }
-},{once:true});
 
 window.onload=()=>startGame();
 
 function startGame(){
-  clearInterval(timer);
-  clearTimeout(timeoutRef);
-  gameActive=true;
-
-  questions=[...allQuestions].sort(()=>Math.random()-0.5);
-  index=0;score=0;lives=3;
-  correctCount=0;wrongCount=0;
-
-  loadQuestion();
+questions=[...allQuestions].sort(()=>Math.random()-0.5);
+index=0;score=0;lives=3;
+correctCount=0;wrongCount=0;
+loadQuestion();
 }
 
 function loadQuestion(){
-
-if(!gameActive) return;
-
-clearInterval(timer);
 
 if(index>=questions.length || lives<=0){
 finishGame();return;
@@ -77,29 +43,22 @@ document.getElementById("progressBar").style.width=
 ((index/questions.length)*100)+"%";
 
 /* TIMER */
+clearInterval(timer);
 timeLeft=10;
 document.getElementById("timer").innerText=timeLeft;
 
 timer=setInterval(()=>{
-  if(!gameActive) return;
+timeLeft--;
+document.getElementById("timer").innerText=timeLeft;
 
-  timeLeft--;
-  document.getElementById("timer").innerText=timeLeft;
-
-  if(timeLeft<=0){
-    clearInterval(timer);
-
-    lives--;
-    wrongCount++;
-    index++;
-
-    shakeScreen();
-
-    clearTimeout(timeoutRef);
-    timeoutRef=setTimeout(()=>{
-      if(gameActive) loadQuestion();
-    },400);
-  }
+if(timeLeft<=0){
+clearInterval(timer);
+lives--;
+wrongCount++;
+index++;
+shakeScreen();
+setTimeout(loadQuestion,400);
+}
 },1000);
 
 /* OPTIONS */
@@ -122,36 +81,26 @@ box.appendChild(b);
 }
 
 function check(pick,correct){
-
-if(!gameActive) return;
-
 clearInterval(timer);
 
 if(pick===correct){
 score+=10;
 correctCount++;
-playSound("correct");
+let s=document.getElementById("correct");
+if(s) s.play();
 }else{
 lives--;
 wrongCount++;
-playSound("wrong");
+let s=document.getElementById("wrong");
+if(s) s.play();
 shakeScreen();
 }
 
 index++;
-
-clearTimeout(timeoutRef);
-timeoutRef=setTimeout(()=>{
-if(gameActive) loadQuestion();
-},600);
+setTimeout(loadQuestion,600);
 }
 
 function finishGame(){
-
-gameActive=false;
-clearInterval(timer);
-clearTimeout(timeoutRef);
-
 let high=localStorage.getItem("highscore")||0;
 if(score>high){
 localStorage.setItem("highscore",score);
@@ -167,15 +116,8 @@ document.getElementById("popup").classList.add("show");
 }
 
 function restart(){
-gameActive=false;
-clearInterval(timer);
-clearTimeout(timeoutRef);
-
 document.getElementById("popup").classList.remove("show");
-
-setTimeout(()=>{
 startGame();
-},100);
 }
 
 function shakeScreen(){
